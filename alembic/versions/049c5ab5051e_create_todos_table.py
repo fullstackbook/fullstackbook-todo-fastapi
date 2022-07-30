@@ -18,10 +18,10 @@ depends_on = None
 
 def upgrade():
     op.execute("""
-    create table todos (
-        id int primary key,
-        name text
-    );
+        create table todos (
+            id bigserial primary key,
+            name text
+        );
     """)
 
 

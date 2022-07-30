@@ -39,7 +39,8 @@ def get_settings():
 
 @app.get("/")
 def read_root(settings: config.Settings = Depends(get_settings)):
-    return settings.app_name
+    print(settings.app_name)
+    return "Hello World"
 
 
 @app.get("/items/{item_id}")

@@ -22,7 +22,7 @@ def search_todos(q: str, db: Session = Depends(get_db)):
     todos = crud.search_todos(db, q)
     return todos
 
-@router.post("/")
+@router.post("/", status_code=status.HTTP_201_CREATED)
 def create_todo(todo: schemas.ToDoRequest, db: Session = Depends(get_db)):
     todo = crud.create_todo(db, todo)
     return todo
