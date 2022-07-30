@@ -17,19 +17,14 @@ def get_db():
     finally:
         db.close()
 
-@router.get("/search", response_model=List[schemas.ToDoResponse])
-def search_todos(q: str, db: Session = Depends(get_db)):
-    todos = crud.search_todos(db, q)
-    return todos
-
 @router.post("/", status_code=status.HTTP_201_CREATED)
 def create_todo(todo: schemas.ToDoRequest, db: Session = Depends(get_db)):
     todo = crud.create_todo(db, todo)
     return todo
 
 @router.get("/", response_model=List[schemas.ToDoResponse])
-def get_todos(db: Session = Depends(get_db)):
-    todos = crud.read_todos(db)
+def get_todos(completed: bool, db: Session = Depends(get_db)):
+    todos = crud.read_todos(db, completed)
     return todos
 
 @router.get("/{id}")

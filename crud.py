@@ -1,9 +1,6 @@
 from sqlalchemy.orm import Session
 import models, schemas
 
-def search_todos(db: Session, q: str):
-    return db.query(models.ToDo).filter(models.ToDo.name.ilike(f"%{q}%")).all()
-
 def create_todo(db: Session, todo: schemas.ToDoRequest):
     db_todo = models.ToDo(name=todo.name, completed=todo.completed)
     db.add(db_todo)
@@ -11,8 +8,11 @@ def create_todo(db: Session, todo: schemas.ToDoRequest):
     db.refresh(db_todo)
     return db_todo
 
-def read_todos(db: Session):
-    return db.query(models.ToDo).all()
+def read_todos(db: Session, completed: bool):
+    if completed is None:
+        return db.query(models.ToDo).all()
+    else:
+        return db.query(models.ToDo).filter(models.ToDo.completed == completed).all()
 
 def read_todo(db: Session, id: int):
     return db.query(models.ToDo).filter(models.ToDo.id == id).first()
