@@ -13,8 +13,8 @@ createdb fullstackbook-todo-fastapi
 pip install alembic
 alembic init alembic
 alembic revision -m "create todos table"
-alembic upgrade head --sql
 alembic upgrade head
+alembic downgrade -1
 psql fullstackbook-todo-fastapi
 pip install psycopg2
 pytest

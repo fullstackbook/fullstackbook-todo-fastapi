@@ -17,13 +17,13 @@ depends_on = None
 
 
 def upgrade():
-    op.create_table(
-        "todos",
-        sa.Column("id", sa.Integer, primary_key=True),
-        sa.Column("name", sa.String),
-        sa.Column("completed", sa.Boolean)
-    )
+    op.execute("""
+    create table todos (
+        id int primary key,
+        name text
+    );
+    """)
 
 
 def downgrade():
-    op.drop_table("todos")
+    op.execute("drop table todos;")
