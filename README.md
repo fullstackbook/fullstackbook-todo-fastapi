@@ -1,20 +1,24 @@
 # Full Stack Book To Do FastAPI
 
-Terminal
+## Setup
 
 ```
-mkdir fullstackbook-todo-fastapi
-cd fullstackbook-todo-fastapi
+createdb fullstackbook-todo-fastapi
 python3 -m venv venv
 . venv/bin/activate
-pip install fastapi "uvicorn[standard]"
+pip install -r requirements.txt
 uvicorn main:app --reload
-createdb fullstackbook-todo-fastapi
-pip install alembic psycopg2
+```
+
+## Configuration
+
+Copy `.env.example` to `.env`.
+
+## Database Migrations
+
+```
 alembic init alembic
 alembic revision -m "create todos table"
 alembic upgrade head
 alembic downgrade -1
-psql fullstackbook-todo-fastapi
-pytest
 ```
