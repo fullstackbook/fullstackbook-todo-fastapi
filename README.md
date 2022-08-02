@@ -4,6 +4,8 @@ https://www.fullstackbook.com/docs/projects/todo/backend/fastapi
 
 ## Setup
 
+Copy `.env.example` to `.env`.
+
 ```
 createdb fullstackbook-todo-fastapi
 python3 -m venv venv
@@ -12,7 +14,3 @@ pip install -r requirements.txt
 alembic upgrade head
 uvicorn main:app --reload
 ```
-
-## Configuration
-
-Copy `.env.example` to `.env`.
